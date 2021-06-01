@@ -1,7 +1,7 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
 
-const URL = 'https://api.frankfurter.app/';
+const URL = 'https://api.frankfurter.app';
 
 interface Names {
   [key: string]: string;
@@ -36,14 +36,21 @@ export const fetchCurrenciesNames = async (): Promise<Names | undefined> => {
   }
 };
 
-export const fetchCurrenciesRates = async (name: string): Promise<Rates | undefined> => {
+export const fetchCurrenciesRates = async (
+  name: string
+): Promise<Rates | undefined> => {
+  console.log(name);
+
   try {
     const {
       data: { rates },
-    }: { data: { rates: Rates } } = await axios.get(`${URL}/latest?from=${name}`);
+    }: { data: { rates: Rates } } = await axios.get(
+      `${URL}/latest?from=${name}`
+    );
 
     return rates;
   } catch (error) {
+    console.log('error!');
     console.log(error);
   }
 };
